@@ -15,7 +15,8 @@ players = [{
 }, {
     "player": "Connor",
     "id": 251488731750465536,
-    "sheet": "porterham729"
+    "sheet": "porterham729",
+    "image": "https://cdn.discordapp.com/attachments/253712269882425344/786059458690285598/Porter_Hamelin.png"
 }]
 
 load_dotenv()
@@ -44,7 +45,7 @@ async def on_message(message):
 
     # curl --location --request GET '{{domain}}/character/{{characterid}}'
     if search("^/sheet", message.content):
-        url = "https://openlegend.heromuster.com/character/?s=porterham729"
+        url = "https://openlegend.heromuster.com/api/character/porterham729"
 
         payload = {}
         files = {}
@@ -52,8 +53,10 @@ async def on_message(message):
 
         response = requests.request("GET", url, headers=headers, data=payload, files=files)
 
-        print(response.text.encode('utf8'))
-        await message.channel.send(response)
+        # print(response.text.encode('utf8'))
+        data = response.json()
+        character = data['success']['character']
+        # await message.channel.send(data)
 
 
 client.run(TOKEN)
