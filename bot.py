@@ -209,7 +209,8 @@ async def on_message(message):
 
             await message.channel.send(embed=embed)
     else:
-        await message.channel.send("No sheet was found.")
+        if search("^/", message.content):
+            await message.channel.send("No sheet was found.")
 
 
 client.run(TOKEN)
