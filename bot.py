@@ -94,8 +94,8 @@ async def on_message(message):
         print(char)
 
         # Start Embed
-        embed = discord.Embed(title=char['charactername'], colour=discord.Colour(0x436d1a),
-                              description=char['description'])
+        embed = discord.Embed(title=char['charactername'], url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
+                              colour=discord.Colour(0x436d1a), description=char['description'])
         embed.set_author(name=char['playername'],
                          url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
                          icon_url="https://openlegend.heromuster.com/character-sheet-icon.png")
