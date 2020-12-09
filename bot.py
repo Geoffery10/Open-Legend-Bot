@@ -21,7 +21,7 @@ players = [{
 }, {
     "player": "Anna",
     "id": 271372320604553216,
-    "sheet": "ziggy145",
+    "sheet": "talkidres809",
     "image": ""
 }, {
     "player": "Randy",
