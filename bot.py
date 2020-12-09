@@ -105,8 +105,8 @@ async def on_message(message):
         # embed.set_thumbnail(url=message.author.avatar_url)
         embed.set_author(name=char['playername'], url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']), icon_url=message.author.avatar_url)
         embed.add_field(name="HP", value=char['hp'], inline=True)
-        embed.add_field(name="WL", value=char['wealth'], inline=True)
-        embed.add_field(name="Level", value=(char['level'] + "." + char['xp']), inline=True)
+        embed.add_field(name="WL", value=("¥"+char['wealth']+"k"), inline=True)
+        embed.add_field(name="Level", value=(char['level'] + " (" + char['xp'] + ")"), inline=True)
 
         embed.add_field(name="Guard", value=char['evasion'], inline=True)
         embed.add_field(name="Toughness", value=char['toughness'], inline=True)
@@ -147,8 +147,8 @@ async def on_message(message):
             embed.add_field(name="Prescience", value=char['prescience'], inline=True)
         if not (char['protection'] == '0' or char['protection'] == ''):
             embed.add_field(name="Protection", value=char['protection'], inline=True)
-        embed.add_field(name="Attribute Points", value=(char['attrspent'] + "/" + char['attrtotal']), inline=True)
-        embed.add_field(name="Feat Points", value=(char['featspent'] + "/" + char['feattotal']), inline=True)
+        # embed.add_field(name="Attribute Points", value=(char['attrspent'] + "/" + char['attrtotal']), inline=True)
+        # embed.add_field(name="Feat Points", value=(char['featspent'] + "/" + char['feattotal']), inline=True)
 
         #perks and flaws
         perk = False
