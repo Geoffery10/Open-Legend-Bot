@@ -128,6 +128,7 @@ async def on_message(message):
 
             if flaws:
                 embed.add_field(name="Flaw", value=flaws, inline=True)
+            await message.channel.send(embed=embed)
 
         if search("^/sheet", message.content) and inDataBase:
             embed.add_field(name="HP", value=char['hp'], inline=True)
@@ -176,7 +177,7 @@ async def on_message(message):
             # embed.add_field(name="Attribute Points", value=(char['attrspent'] + "/" + char['attrtotal']), inline=True)
             # embed.add_field(name="Feat Points", value=(char['featspent'] + "/" + char['feattotal']), inline=True)
 
-        await message.channel.send(embed=embed)
+            await message.channel.send(embed=embed)
     else:
         await message.channel.send("No sheet was found.")
 
