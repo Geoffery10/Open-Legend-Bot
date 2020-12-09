@@ -12,32 +12,56 @@ players = [{
     "player": "Geoffery",
     "id": 253710834553847808,
     "sheet": "test166",
-    "image": ""
+    "image": "",
+    "companion": {
+        "sheet": "",
+        "image": ""
+    }
 }, {
     "player": "Connor",
     "id": 251488731750465536,
     "sheet": "porterham729",
-    "image": "https://cdn.discordapp.com/attachments/253712269882425344/786059458690285598/Porter_Hamelin.png"
+    "image": "https://cdn.discordapp.com/attachments/253712269882425344/786059458690285598/Porter_Hamelin.png",
+    "companion": {
+        "sheet": "",
+        "image": ""
+    }
 }, {
     "player": "Anna",
     "id": 271372320604553216,
     "sheet": "talkidres809",
-    "image": "https://cdn.discordapp.com/attachments/271377218192670721/786263500971311125/PSX_20201209_100304.jpg"
+    "image": "https://cdn.discordapp.com/attachments/271377218192670721/786263500971311125/PSX_20201209_100304.jpg",
+    "companion": {
+        "sheet": "ziggy145",
+        "image": "https://cdn.discordapp.com/attachments/271377218192670721/786263513273204757/PSX_20201209_100820.jpg"
+    }
 }, {
     "player": "Randy",
     "id": 317721524251394051,
     "sheet": "",
-    "image": ""
+    "image": "",
+    "companion": {
+        "sheet": "",
+        "image": ""
+    }
 }, {
     "player": "Wesley",
     "id": 270331940870160384,
     "sheet": "",
-    "image": ""
+    "image": "",
+    "companion": {
+        "sheet": "",
+        "image": ""
+    }
 }, {
     "player": "Leticia",
     "id": 533511368385495081,
     "sheet": "",
-    "image": ""
+    "image": "",
+    "companion": {
+        "sheet": "",
+        "image": ""
+    }
 }]
 
 load_dotenv()
@@ -84,7 +108,10 @@ async def on_message(message):
 
 
     if inDataBase == True:
-        url = "https://openlegend.heromuster.com/api/character/" + player['sheet']
+        if search("^/sheetc", message.content):
+            url = "https://openlegend.heromuster.com/api/character/" + player['companion']['sheet']
+        else:
+            url = "https://openlegend.heromuster.com/api/character/" + player['sheet']
         payload = {}
         files = {}
         headers = {}
@@ -100,8 +127,11 @@ async def on_message(message):
                          url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
                          icon_url="https://openlegend.heromuster.com/character-sheet-icon.png")
 
-        if (len(players[1]['image']) > 0):
+        if len(player['image'] > 0):
             embed.set_thumbnail(url=player['image'])
+        if search("^/sheetc", message.content):
+            if len(player['companion']['image'] > 0):
+                embed.set_thumbnail(url=player['companion']['image'])
 
         if (search("^/perk", message.content) or search("^/flaw", message.content)) and inDataBase:
             # perks and flaws
@@ -130,7 +160,9 @@ async def on_message(message):
                 embed.add_field(name="Flaw", value=flaws, inline=True)
             await message.channel.send(embed=embed)
 
-        if search("^/sheet", message.content) and inDataBase:
+        elif search("^/sheetc", message.content) and inDataBase:
+
+        elif search("^/sheet", message.content) and inDataBase:
             embed.add_field(name="HP", value=(char['hp']), inline=True)
             embed.add_field(name="WL", value=("¥"+char['wealth']+"k"), inline=True)
             embed.add_field(name="Level", value=(char['level'] + " (" + char['xp'] + ")"), inline=True)
