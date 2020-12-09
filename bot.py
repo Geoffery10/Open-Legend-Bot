@@ -22,7 +22,7 @@ players = [{
     "player": "Anna",
     "id": 271372320604553216,
     "sheet": "talkidres809",
-    "image": ""
+    "image": "https://cdn.discordapp.com/attachments/271377218192670721/786263500971311125/PSX_20201209_100304.jpg"
 }, {
     "player": "Randy",
     "id": 317721524251394051,
@@ -98,7 +98,7 @@ async def on_message(message):
                               description=char['description'])
         embed.set_author(name=char['playername'],
                          url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
-                         icon_url=message.author.avatar_url)
+                         icon_url="https://thumbs.dreamstime.com/t/square-tunnel-space-port-blue-sparks-space-staring-end-56034602.jpg")
 
         if (len(players[1]['image']) > 0):
             embed.set_thumbnail(url=player['image'])
