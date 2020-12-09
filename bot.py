@@ -127,10 +127,10 @@ async def on_message(message):
                          url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
                          icon_url="https://openlegend.heromuster.com/character-sheet-icon.png")
 
-        if len(player['image'] > 0):
+        if len(player['image']) > 0:
             embed.set_thumbnail(url=player['image'])
         if search("^/sheetc", message.content):
-            if len(player['companion']['image'] > 0):
+            if len(player['companion']['image']) > 0:
                 embed.set_thumbnail(url=player['companion']['image'])
 
         if (search("^/perk", message.content) or search("^/flaw", message.content)) and inDataBase:
