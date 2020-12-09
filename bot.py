@@ -160,8 +160,6 @@ async def on_message(message):
                 embed.add_field(name="Flaw", value=flaws, inline=True)
             await message.channel.send(embed=embed)
 
-        elif search("^/sheetc", message.content) and inDataBase:
-
         elif search("^/sheet", message.content) and inDataBase:
             embed.add_field(name="HP", value=(char['hp']), inline=True)
             embed.add_field(name="WL", value=("¥"+char['wealth']+"k"), inline=True)
