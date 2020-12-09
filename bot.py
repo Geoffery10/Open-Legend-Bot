@@ -98,7 +98,7 @@ async def on_message(message):
                               description=char['description'])
         embed.set_author(name=char['playername'],
                          url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
-                         icon_url=player.avatar_url)
+                         icon_url=message.author.avatar_url)
 
         if (len(players[1]['image']) > 0):
             embed.set_thumbnail(url=player['image'])
