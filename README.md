@@ -1,2 +1,2 @@
-# Lore Master Bot
- Lore Master Discord Bot Capable of Searching Lore Files
+# Open Legend Bot
+ Open Legend Discord Bot Capable of Loading Character Sheets
