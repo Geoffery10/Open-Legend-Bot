@@ -2,12 +2,21 @@
 import os
 
 import discord
-from discord.ext.commands import Bot
-from discord.ext import commands
+import requests
 from dotenv import load_dotenv
 import json
 from re import search
 import requests
+
+players = [{
+    "player": "Geoffery",
+    "id": 253710834553847808,
+    "sheet": "test166"
+}, {
+    "player": "Connor",
+    "id": 251488731750465536,
+    "sheet": "porterham729"
+}]
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -33,8 +42,18 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    # curl --location --request GET '{{domain}}/character/{{characterid}}'
     if search("^/sheet", message.content):
-        print("TOAST")
+        url = "https://openlegend.heromuster.com/character/?s=porterham729"
+
+        payload = {}
+        files = {}
+        headers = {}
+
+        response = requests.request("GET", url, headers=headers, data=payload, files=files)
+
+        print(response.text.encode('utf8'))
+        await message.channel.send(response)
 
 
 client.run(TOKEN)
