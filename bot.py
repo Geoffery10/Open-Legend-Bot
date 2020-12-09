@@ -131,7 +131,7 @@ async def on_message(message):
             await message.channel.send(embed=embed)
 
         if search("^/sheet", message.content) and inDataBase:
-            embed.add_field(name="HP", value=char['hp'], inline=True)
+            embed.add_field(name="HP", value=(char['hp']), inline=True)
             embed.add_field(name="WL", value=("¥"+char['wealth']+"k"), inline=True)
             embed.add_field(name="Level", value=(char['level'] + " (" + char['xp'] + ")"), inline=True)
 
