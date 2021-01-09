@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import json
 from re import search
 import requests
+from loggingChannel import sendLog
 
 players = [{
     "player": "Geoffery",
@@ -72,7 +73,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    print(await sendLog(log=f'{client.user} has connected to Discord!', client=client))
     # activity = discord.Game(name="to Lore", type=2)
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Magic"))
 
@@ -80,7 +81,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     await member.create_dm()
-    await member.dm_channel.send(f'Hello, {member.name}, welcome traveller!')
+    await member.dm_channel.send(await sendLog(log=f'Hello, {member.name}, welcome traveller!', client=client))
 
 
 @client.event
@@ -93,7 +94,10 @@ async def on_message(message):
     if len(mentions) > 0:
         mention = True
         mentioned = mentions[0].id
-        print("Mentioned:", mentions[0].name)
+        print(await sendLog(log=("Mentioned: " + mentions[0].name), client=client))
+        if mentions[0].id == 786051899295662110:
+            if search("^!quit", message.content.lower()) and message.channel == client.get_channel(789190323326025789):
+                await client.logout()
     else:
         mentioned = message.author.id
 
@@ -118,7 +122,7 @@ async def on_message(message):
         response = requests.request("GET", url, headers=headers, data=payload, files=files)
         data = response.json()
         char = data['success']['character']
-        print(char)
+        print(await sendLog(log=char, client=client))
 
         # Start Embed
         embed = discord.Embed(title=char['charactername'], url=("https://openlegend.heromuster.com/character?s=" + data['success']['characterid']),
