@@ -94,7 +94,7 @@ async def on_message(message):
     if len(mentions) > 0:
         mention = True
         mentioned = mentions[0].id
-        print(await sendLog(log=("Mentioned: " + mentions[0].name), client=client))
+        # print(await sendLog(log=("Mentioned: " + mentions[0].name), client=client))
         if mentions[0].id == 786051899295662110:
             if search("^!quit", message.content.lower()) and message.channel == client.get_channel(789190323326025789):
                 await client.logout()
